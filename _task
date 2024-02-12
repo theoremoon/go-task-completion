@@ -3,7 +3,7 @@
 _task() {
     local tasklist=$(task --list-all)
     if [[ "$?" -eq 0 ]]; then
-        local tasks=("${(@f)$(echo "$f" | grep '^\*' | awk '{print $2}'  | sed 's/.$//')}")
+        local tasks=("${(@f)$(echo "$tasklist" | grep '^\*' | awk '{print $2}'  | sed 's/.$//')}")
         compadd "$@" $tasks
     fi
 }
