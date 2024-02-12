@@ -1,8 +1,9 @@
 #compdef task
 
 _task() {
-    if [[ -f Taskfile.yml ]]; then
-        local tasks=$(task --list-all | cat | grep '^\*' | awk '{print $2}' | sed 's/.$//')
+    local tasklist=$(task --list-all)
+    if [[ "$?" -eq 0 ]]; then
+        local tasks=$(echo "$tasklist" | grep '^\*' | awk '{print $2}' | sed 's/.$//')
         describe task tasks
     fi
 }
