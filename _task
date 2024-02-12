@@ -2,7 +2,7 @@
 
 _task() {
     if [[ -f Taskfile.yml ]]; then
-        local tasks=("${@f)$(task --list-all | cat | grep '^\*' | awk '{print $2}' | sed 's/.$//')}")
-        compadd "$@" $tasks
+        local tasks=$(task --list-all | cat | grep '^\*' | awk '{print $2}' | sed 's/.$//')
+        describe task tasks
     fi
 }
