@@ -1,0 +1,9 @@
+#compdef task
+
+_task() {
+    if [[ -f Taskfile.yml ]]; then
+        local tasks=("${(@f)$(yq -r '.tasks | keys | .[]' Taskfile.yml)}")
+        
+        compadd "$@" $tasks
+    fi
+}
